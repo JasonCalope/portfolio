@@ -26,18 +26,32 @@
     --pill-border: #a0ce14;
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+  }
 
   body {
+    width: 100%;
+    min-height: 100vh;
     background: var(--bg);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   .display { font-family: 'Radio Canada Big', sans-serif; }
+  img, svg { max-width: 100%; display: block; }
+  .services-row3 > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
 
   /* ── HEADER ── */
   header {
@@ -48,9 +62,10 @@
     border-bottom: 1px solid var(--border);
   }
   .header-inner {
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 16px 24px;
+    padding: 16px clamp(16px, 2vw, 24px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,6 +96,17 @@
   }
   nav a:hover { color: var(--text-primary); }
   nav a.active { color: var(--accent); }
+  .nav-toggle,
+  .nav-close {
+    display: none;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  .nav-backdrop {
+    display: none;
+  }
   .available-badge {
     display: flex;
     align-items: center;
@@ -117,9 +143,10 @@
   /* ── SECTIONS ── */
   section { padding: 112px 0 0; }
   .container {
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 clamp(16px, 2vw, 24px);
   }
 
   /* ── HERO ── */
@@ -128,16 +155,15 @@
     background: var(--bg);
   }
   .hero-inner {
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 160px clamp(16px, 2vw, 24px) 112px;
     min-height: 942px;
     position: relative;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: auto auto;
-    padding-top: 160px;
-    padding-bottom: 112px;
     gap: 0;
   }
   .hero-headline {
@@ -160,6 +186,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     width: fit-content;
+    margin-bottom: 15px;
   }
   .hero-title {
     font-family: 'Radio Canada Big', sans-serif;
@@ -214,7 +241,10 @@
     margin-top: 0;
   }
   .hero-photo-card {
-    padding: 24px;
+    padding-top: 24px;
+    padding-right: 0px;
+    padding-bottom: 24px;
+    padding-left: 0px;
 
   }
   .hero-photo-bg {
@@ -276,6 +306,7 @@
     letter-spacing: -0.5px;
     line-height: 30px;
     margin-bottom: 24px;
+   
   }
   .cta-buttons {
     display: flex;
@@ -407,6 +438,12 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 24px;
+  }
+  .services-row3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 60px;
   }
   .service-card {
     background: var(--bg-card);
@@ -894,6 +931,370 @@
   .project-arrow:hover { background: #2e2f1e; border-color: #5b5c55; }
   .project-arrow svg { width: 18px; height: 18px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
 
+  @media (max-width: 1180px) {
+    .hero-title {
+      font-size: 62px;
+      line-height: 1.08;
+    }
+    .services-grid,
+    .about-grid,
+    .awards-layout {
+      grid-template-columns: 1fr;
+    }
+    .services-row2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    .services-row3-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stats-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .footer-row1 {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .header-inner {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    nav {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-inner {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 100px;
+    }
+    .hero-headline,
+    .hero-contact,
+    .hero-bottom {
+      grid-column: 1;
+    }
+    .hero-headline {
+      padding-right: 0;
+    }
+    .hero-contact {
+      padding-top: 0;
+      padding-right: 0;
+      justify-content: flex-start;
+    }
+    .hero-bottom {
+      grid-template-columns: 1fr;
+      padding-top: 42px;
+    }
+    .services-grid,
+    .services-row2,
+    .services-row3-grid,
+    .projects-grid,
+    .about-bottom,
+    .stats-row {
+      grid-template-columns: 1fr;
+    }
+    .services-row3 > div {
+      grid-template-columns: 1fr;
+      margin-bottom: 24px;
+    }
+    .project-card.tall,
+    .project-card[style*="grid-column:2"] {
+      grid-row: auto !important;
+      grid-column: auto !important;
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .tools-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .exp-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .exp-date {
+      margin-top: 0;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      padding: 0 !important;
+    }
+    .header-inner,
+    .container,
+    .hero-inner,
+    .footer-cta-inner,
+    .footer-social,
+    .footer-bottom {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    * {
+      max-width: 100%;
+    }
+    .header-inner {
+      position: relative;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .nav-toggle {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      margin-left: auto;
+      z-index: 2;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: min(82vw, 320px);
+      height: 100vh;
+      background: rgba(17, 18, 15, 0.98);
+      border-right: 1px solid var(--border);
+      box-shadow: 18px 0 40px rgba(0,0,0,0.38);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      padding: 18px 18px 24px;
+      transform: translateX(-105%);
+      transition: transform 0.25s ease;
+      z-index: 1200;
+    }
+    nav.open {
+      transform: translateX(0);
+    }
+    nav a {
+      padding: 14px 12px;
+      font-size: 17px;
+      border-radius: 10px;
+      color: var(--text-primary);
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .nav-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      margin-left: auto;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      display: block;
+      background: rgba(4, 6, 4, 0.56);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      z-index: 1100;
+    }
+    .nav-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    nav .available-badge {
+      display: flex;
+      margin-top: auto;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 14px;
+    }
+    .available-badge {
+      display: none;
+    }
+    .hero-inner {
+      display: block;
+      padding-top: 72px;
+      padding-bottom: 32px;
+    }
+    .hero-headline,
+    .hero-contact {
+      display: block;
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .hero-headline {
+      margin-bottom: 22px;
+    }
+    .hero-contact {
+      margin-top: 0;
+    }
+    .logo {
+      font-size: 38px;
+      letter-spacing: -1.6px;
+    }
+    .hero-title {
+      font-size: 46px;
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+    .hero-description {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .btn-primary,
+    .btn-outline,
+    .btn-ghost {
+      width: 100%;
+      justify-content: center;
+    }
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .connect-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .projects-grid {
+      gap: 18px;
+    }
+    .project-gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 42px 14px 0;
+    }
+    .project-gallery .gallery-item.featured {
+      grid-column: span 2;
+    }
+    .project-body {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 18px 18px 16px;
+    }
+    .project-body .project-content {
+      padding-right: 0;
+    }
+    .project-arrow {
+      align-self: flex-end;
+      margin-left: 0;
+    }
+    .project-name {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 14px;
+    }
+    .section-heading {
+      font-size: 38px;
+    }
+    .section-tag {
+      margin-bottom: 16px;
+    }
+    .service-card,
+    .service-cta,
+    .award-item,
+    .contact-card {
+      padding: 24px;
+    }
+    .awards-photo {
+      min-height: 260px;
+    }
+    .award-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .tools-grid,
+    .stats-row {
+      grid-template-columns: 1fr;
+    }
+    .footer-heading {
+      font-size: 34px;
+    }
+    .footer-social {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .logo {
+      font-size: 30px;
+    }
+    nav {
+      gap: 4px;
+    }
+    nav a {
+      padding: 5px 8px;
+      font-size: 13px;
+    }
+    .hero-title {
+      font-size: 36px;
+    }
+    .section-heading {
+      font-size: 32px;
+    }
+    .hero-photo-bg {
+      height: 300px;
+    }
+    .hero-photo {
+      height: 380px;
+    }
+    .role-pill {
+      display: none;
+    }
+    .project-tag {
+      left: 14px;
+      top: 14px;
+    }
+    .contact-list li {
+      font-size: 14px;
+    }
+    .service-card,
+    .service-cta,
+    .award-item,
+    .contact-card {
+      padding: 20px;
+    }
+  }
+
   .gallery-modal {
     position: fixed;
     inset: 0;
@@ -1056,11 +1457,11 @@
     padding: 80px 0 40px;
   }
   .footer-cta-inner {
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 clamp(16px, 2vw, 24px) 40px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 40px;
     margin-bottom: 32px;
   }
   .footer-row1 {
@@ -1081,14 +1482,16 @@
     display: flex;
     align-items: center;
     gap: 32px;
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 clamp(16px, 2vw, 24px);
   }
   .footer-bottom {
-    max-width: 1328px;
+    width: min(100%, 1328px);
+    max-width: 100%;
     margin: 0 auto;
-    padding: 24px 24px 0;
+    padding: 24px clamp(16px, 2vw, 24px) 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1128,19 +1531,30 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">JS</a>
-    <nav>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-backdrop" id="navBackdrop"></div>
+    <nav id="mobileNav">
+      <button class="nav-close" type="button" aria-label="Close navigation">×</button>
       <a href="#hero" class="active">Home</a>
       <a href="#services">Skills</a>
       <a href="#about">About</a>
       <a href="#projects">Project</a>
       <a href="#awards">Award</a>
       <a href="#footer-cta">Contact Us</a>
+      <div class="available-badge">
+        <div class="available-dot"></div>
+        <span>Available for New Project</span>
+      </div>
     </nav>
-    <div class="available-badge">
+    <!-- <div class="available-badge">
       <div class="available-dot"></div>
       <span>Available for New Project</span>
     </div>
-  </div>
+  </div> -->
 </header>
 
 <!-- ── HERO ── -->
@@ -1455,8 +1869,7 @@
         </div>
       </div>
     </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-bottom:60px;">
+ <div class="services-row3-grid">
       <div class="service-card">
         <div class="service-icon">
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -1579,6 +1992,7 @@
         <a href="#projects" class="btn-primary" style="width:fit-content;">All Services</a>
       </div>
     </div>
+    
   </div>
 </section>
 
@@ -1763,7 +2177,7 @@
             </div><span class="tool-name">Claude</span></div>
           </div>
         </div>
-        <div class="experience-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 32px;">
+        <div class="experience-card" style="display: grid;align-items:center;justify-content:space-between;gap:16px;padding:24px 32px;grid-auto-flow: column;">
           <p class="display" style="font-size:20px;color:var(--text-primary);letter-spacing:-0.5px;line-height:1.3;flex:1;">Let's work together!<br><span style="color:var(--text-muted);">Send me a message</span></p>
           <a href="mailto:calopejason.cj@gmail.com" class="btn-primary" style="flex-shrink:0;">Contact →</a>
         </div>
@@ -2174,8 +2588,31 @@
     if (event.key === 'ArrowLeft') moveGallery(-1);
   });
 
+  const navToggle = document.querySelector('.nav-toggle');
+  const navClose = document.querySelector('.nav-close');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const mobileNav = document.getElementById('mobileNav');
   const navLinks = document.querySelectorAll('nav a');
   const sections = ['hero','services','about','clients','projects','awards','footer-cta'];
+
+  function setNavOpen(open) {
+    mobileNav.classList.toggle('open', open);
+    navBackdrop.classList.toggle('active', open);
+    navToggle?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  navToggle?.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.contains('open');
+    setNavOpen(!isOpen);
+  });
+
+  navClose?.addEventListener('click', () => setNavOpen(false));
+  navBackdrop?.addEventListener('click', () => setNavOpen(false));
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => setNavOpen(false));
+  });
+
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(id => {
